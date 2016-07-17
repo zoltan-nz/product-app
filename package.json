@@ -1,7 +1,7 @@
 {
-  "name": "products-app",
+  "name": "product-app",
   "version": "0.0.0",
-  "description": "Small description for products-app goes here",
+  "description": "Demo application",
   "private": true,
   "directories": {
     "doc": "doc",
