@@ -1,6 +1,6 @@
 # Product App
 
-```
+```shell
 $ ember new product-app
 ```
 
@@ -41,7 +41,7 @@ $ ember new product-app
 
 ## Requirements
 
-* [ ] Admin user can navigate to `/admin`
+* [x] Admin user can navigate to `/admin`
 * [ ] Admin user can CRUD `categories` on `/admin/categories` 
 * [ ] Admin user can CRUD `products` on `/admin/products`
 * [ ] Admin user can change the `category` of a `product`
@@ -50,11 +50,11 @@ $ ember new product-app
 
 ### Creating `application` template and a link to the home page
 
-```
+```shell
 $ ember g template application
 ```
 
-```
+```handlebars
 {{!-- app/templates/application.hbs --}}
 {{link-to 'Home' 'index'}}
 
@@ -65,11 +65,11 @@ $ ember g template application
 
 Add an index page with a header.
 
-```
+```shell
 $ ember g template index
 ```
 
-```
+```handlebars
 {{!-- app/templates/index.hbs --}}
 <h1>Home Page</h1>
 ```
@@ -78,18 +78,44 @@ $ ember g template index
 
 Create an `admin` route, add a header to the main page and add a link to the `application` template.
 
-```
+```shell
 ember g route admin
 ```
 
-```
+```handlebars
 {{!-- app/templates/admin.hbs --}}
 <h1>Admin Page</h1>
 
 {{outlet}}
 ```
 
-```
+```handlebars
 {{!-- app/templates/application.hbs --}}
 {{link-to 'Home' 'index'}} | {{link-to 'Admin' 'admin'}}
+```
+
+### `admin/categories` page
+
+Create a categories page under admin route and add a link to the main admin page.
+
+```shell
+$ ember g route admin/categories
+```
+
+```handlebars
+{{!-- app/templates/admin/categories.hbs --}}
+<h1>Categories Admin Page</h1>
+
+{{outlet}}
+```
+
+```handlebars
+{{!-- app/templates/admin.hbs --}}
+<h1>Admin Page</h1>
+
+{{link-to 'Categories' 'admin.categories'}}
+
+<hr>
+
+{{outlet}}
 ```
