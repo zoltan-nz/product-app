@@ -151,8 +151,166 @@ The "wrapper" page file name is the same as the represented route, so if we have
 
 Important, if we have a subroute, we have to add `{{outlet}}` handlebar code to the "wrapper" template. The subroute content will be rendered in this "outlet" placeholder. 
 
+## Creating the `Category` model
+
+**Repeat**: Please learn *computed properties*, *observers* and *actions* from Lesson 2 on [Ember][yoember.com] Tutorial.
+
+In this session we add real functionality to our Category Admin page. Firstly, we implement an input box with an "Add" button, which will extend the category list, additionally we attache a "Delete" button also to each existing category item, so we can remove them from the list. In our first implementation it will use only an Ember Array, so it uses the web-browser memory only. Secondly, we will use Ember Data and a proper Model, which would expect the existence of a database and a backend system. Luckily we can mock the backend. I show two options here, the first will use [Ember CLI http-mock server][ember_cli_mock_server], the second one will use a popular add-on: [Ember Mirage][ember_mirage].
+
+### Data down from route to template
+
+**Important**: In Ember.js everything starts from the url. When you navigate to a page, the url changes, Ember automatically checks the map in `router.js`. Based on the `Router.map` it is automatically enter in the connected Route Handler (route). Ember will goes through on a certain steps in this route, after it will setup the controller and finally the template.  
+
+Check out this figure from the [Ember Guides][ember_guide]
+
+![Ember Application concept][ember_concept_image]
+
+The rule of thumb, if you would like to show data from an external source (from your database) on your page, it should download (via backend service) almost always in `model` hook of the route handler. Which means, you almost always have to have a `model` function in  your route file and return the data from that function, it will automatically added to a `model` property in your controller and template. Let see, how it works in our Category Admin page.
+
+We already generated our Categories route handler (`app/routes/admin/categories.js`). Let's extend this file with a `model` function, with a "model hook". We call it "model hook", because this function is exists in the Ember framework, so it will be automatically invoked. Check out in the [official documentation][route_handler_api] how many "built-in" functions are in a route handler, but don't worry, we will use only a couple, if you are already on the official api documentation page, please read the doc of the `model` hook with clicking on the "model" link. If it does not make any sense, you are not alone. It is totally normal, when you start learning a new framework or tool. ;) It will be much clearer later. 
+
+Back to our Product App. Update the category route. Let's return an array of objects in our "model hook".
+
+```js
+// app/routes/admin/categories.js
+import Ember from 'ember';
+
+export default Ember.Route.extend({
+
+  model() {
+    return [
+      {
+        id: 1,
+        name: 'First Category'
+      },
+      {
+        id: 2,
+        name: 'Second Category'
+      }
+    ];
+  }
+  
+});
+```
+
+Now, update the categories template, add an `each` loop handlebars helper to `categories.hbs`:
+
+```hbs
+<h1>Categories Admin Page</h1>
+
+<ul>
+  {{#each model as |category|}}
+    <li>ID: {{category.id}}, NAME: {{category.name}}</li>
+  {{/each}}
+</ul>
+```
+Yey, we have a list of categories:
+
+![List categories][step_2_2]
+
+Next step is creating an input field and adding new items to our model. I suppose, you already know a lot about [actions][actions_official_guide] also.
+
+Update your template with a form, an input box with action, and let's add a counter also:
+
+```hbs
+{{!-- /app/templates/admin/categories.hbs --}}
+<h1>Categories Admin Page</h1>
+
+<form>
+  <label>ID:</label>
+    {{input value=newCategoryId}}
+  <label>NAME:</label>
+    {{input value=newCategoryName}}
+  <button type="submit" {{action 'addNewCategory' newCategoryId newCategoryName}}>Add</button>
+</form>
+
+<ul>
+  {{#each model as |category|}}
+    <li>ID: {{category.id}}, NAME: {{category.name}}</li>
+  {{/each}}
+</ul>
+
+Category Counter: {{model.length}}
+```
+So we have a simple form, where we read an `id` and a `name`, we can submit this data with hitting Enter or clicking on the button. It will invoke the action function and pass two params.
+
+We have to implement the action in our route handler. This action will push a new object to the `model` array, which is in the controller.
+
+```js
+// app/routes/admin/categories.js
+import Ember from 'ember';
+
+export default Ember.Route.extend({
+
+  model() {
+    return [
+      {
+        id: 1,
+        name: 'First Category'
+      },
+      {
+        id: 2,
+        name: 'Second Category'
+      }
+    ];
+  },
+
+  actions: {
+
+    addNewCategory(id, name) {
+      this.controller.get('model').pushObject({ id, name });
+    }
+
+  }
+});
+```
+Add the delete button also, extend the `categories.hbs` template list element with a button:
+
+```hbs
+<ul>
+  {{#each model as |category|}}
+    <li>
+      ID: {{category.id}}, NAME: {{category.name}} 
+      <button {{action 'deleteCategory' category}}>Del</button>
+    </li>
+  {{/each}}
+</ul>
+```
+Action goes in `app/routes/admin/categories.js`:
+
+```js
+//...
+  actions: {
+
+    addNewCategory(id, name) {
+      this.controller.get('model').pushObject({ id, name });
+    },
+
+    deleteCategory(category) {
+      this.controller.get('model').removeObject(category);
+    }
+  }
+//...
+```
+You can read more about `pushObject` and `removeObject` on `Ember.NativeArray` [documentation page][native_array_doc].
+
+Is your app looks like this?
+
+![Form with Add and Del buttons][step_2_3]
+
+Brilliant, you can add and remove items from an array model, however if you reload the page, all added data is gone.
 
 [yoember.com]: http://yoember.com
 [nested-template]: doc/nested-template-ember.png
+[ember_guide]: https://guides.emberjs.com/v2.7.0/getting-started/core-concepts
+[ember_concept_image]: https://guides.emberjs.com/v2.7.0/images/ember-core-concepts/ember-core-concepts.png
+[ember_cli_mock_server]: https://ember-cli.com/user-guide/#mocks-and-fixtures
+[ember_mirage]: http://www.ember-cli-mirage.com/
+[route_handler_api]: http://emberjs.com/api/classes/Ember.Route.html
+[actions_official_guide]: https://guides.emberjs.com/v2.7.0/templates/actions/
+[native_array_doc]: http://emberjs.com/api/classes/Ember.NativeArray.html
+
 [step_1]: doc/step_1.png
 [step_2_1]: doc/step_2_1.png
+[step_2_2]: doc/step_2_2.png
+[step_2_3]: doc/step_2_3.png
