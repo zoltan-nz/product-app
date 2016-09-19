@@ -298,18 +298,83 @@ Is your app looks like this?
 
 ![Form with Add and Del buttons][step_2_3]
 
-Brilliant, you can add and remove items from an array model, however if you reload the page, all added data is gone.
+Brilliant, you can add and remove items from an array model, however if you reload the page, all added record is gone.
 
-[yoember.com]: http://yoember.com
-[nested-template]: doc/nested-template-ember.png
+### Ember Data
+
+Ember Data is responsible for managing ajax request from or to a server. It uses adapters to communicate with different type of backend systems.
+
+An Ember application has a `store` service. We can access data via this service.
+
+The core element of Ember Data is Ember Model, where we can declare the properties of a model.
+
+[More about models on the official guide][official_guide_models] and architecture overview from this page:
+
+![Ember store architecture overview][ember_store_image]
+
+**Generate Model**
+
+Ember CLI can generate for us a skeleton model. The following command will create a `category.js` in our `model` folder and will add a `name` field with `string` type.
+
+$ ember generate model category name:string
+
+**Update model hook**
+
+We have a model in our Product Application, let's use it in our Categories admin page. 
+
+Let's delete the dummy data from `model()` hook in `/routes/admin/categories.js` and update as follow. In the same step, we can update our `addNewCategory()` and `deleteCategory()` actions also.
+ 
+```js
+// app/routes/admin/categories.js
+import Ember from 'ember';
+
+export default Ember.Route.extend({
+
+  model() {
+    return this.store.findAll('category');
+  },
+
+  actions: {
+
+    addNewCategory(id, name) {
+      this.store.createRecord('category', { id, name }).save();
+    },
+
+    deleteCategory(category) {
+      category.destroyRecord();
+    }
+  }
+});
+```
+
+We use `this.store.findAll()` for downloading all the available record, `this.store.createRecord()` can create a new record, `.save()` would try to permanently save it. We can use `.destroyRecord()` for totally remove from our app and from the server the related record.
+
+But first of all try out the above code. Try to **reload** the page.
+
+*Check the console!* Our app try to download data from somewhere, but get a 404 Error response, because we doesn't really have any backend server.
+
+Your backend could be Ruby on Rails app, Node.js app, .Net app, PHP app, Python based app, Elixir or anything else. It could be a cloud based solution also, like Firebase, you've already learned about it when you built the Library App from http://yoember.com.
+
+In this tutorial, we will use the famous [Ember-Mirage][ember_mirage] mock server.
+
+To be continued...
+
 [ember_guide]: https://guides.emberjs.com/v2.7.0/getting-started/core-concepts
-[ember_concept_image]: https://guides.emberjs.com/v2.7.0/images/ember-core-concepts/ember-core-concepts.png
 [ember_cli_mock_server]: https://ember-cli.com/user-guide/#mocks-and-fixtures
-[ember_mirage]: http://www.ember-cli-mirage.com/
-[route_handler_api]: http://emberjs.com/api/classes/Ember.Route.html
 [actions_official_guide]: https://guides.emberjs.com/v2.7.0/templates/actions/
+[official_guide_models]: https://guides.emberjs.com/v2.7.0/models/
+
+[route_handler_api]: http://emberjs.com/api/classes/Ember.Route.html
 [native_array_doc]: http://emberjs.com/api/classes/Ember.NativeArray.html
 
+[yoember.com]: http://yoember.com
+[ember_mirage]: http://www.ember-cli-mirage.com/
+
+
+[ember_concept_image]: https://guides.emberjs.com/v2.7.0/images/ember-core-concepts/ember-core-concepts.png
+[ember_store_image]: https://guides.emberjs.com/v2.7.0/images/guides/models/finding-unloaded-record-step1-diagram.png
+
+[nested-template]: doc/nested-template-ember.png
 [step_1]: doc/step_1.png
 [step_2_1]: doc/step_2_1.png
 [step_2_2]: doc/step_2_2.png

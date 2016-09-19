@@ -3,26 +3,17 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model() {
-    return [
-      {
-        id: 1,
-        name: 'First Category'
-      },
-      {
-        id: 2,
-        name: 'Second Category'
-      }
-    ];
+    return this.store.findAll('category');
   },
 
   actions: {
 
     addNewCategory(id, name) {
-      this.controller.get('model').pushObject({ id, name });
+      this.store.createRecord('category', { id, name }).save();
     },
 
     deleteCategory(category) {
-      this.controller.get('model').removeObject(category);
+      category.destroyRecord();
     }
   }
 });
