@@ -1,20 +1,32 @@
-<h1>Categories Admin Page</h1>
+<h1>Admin - Categories</h1>
 
-<form>
-  <label>ID:</label>
-    {{input value=newCategoryId}}
-  <label>NAME:</label>
-    {{input value=newCategoryName}}
-  <button type="submit" {{action 'addNewCategory' newCategoryId newCategoryName}}>Add</button>
-</form>
+<div class="well well-sm">
+  {{#bs-form formLayout="inline" action="addNewCategory" model=newCategoryName}}
+    {{bs-form-element label="New category:" placeholder="Category name" value=newCategoryName}}
+    {{bs-button defaultText="Add" type="primary" buttonType="submit"}}
+  {{/bs-form}}
+</div>
 
-<ul>
+<table class="table table-striped">
+  <caption>List of categories</caption>
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
   {{#each model as |category|}}
-    <li>
-      ID: {{category.id}}, NAME: {{category.name}}
-      <button {{action 'deleteCategory' category}}>Del</button>
-    </li>
+    <tr>
+      <td>{{category.id}}</td>
+      <td>{{category.name}}</td>
+      <td>
+        <button class="btn btn-xs btn-danger" {{action 'deleteCategory' category}}>Del</button>
+      </td>
+    </tr>
   {{/each}}
-</ul>
+  </tbody>
+</table>
 
-Category Counter: {{model.length}}
+Number of categories: {{model.length}}
