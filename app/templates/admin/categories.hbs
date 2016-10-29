@@ -1,11 +1,18 @@
 <h1>Admin - Categories</h1>
 
 <div class="well well-sm">
-  {{#bs-form formLayout="inline" action="addNewCategory" model=newCategoryName}}
-    {{bs-form-element label="New category:" placeholder="Category name" value=newCategoryName}}
+  {{#bs-form formLayout="inline" action="addNewCategory" model=newCategory}}
+    {{bs-form-element label="New category:" placeholder="Category name" value=newCategory.name}}
     {{bs-button defaultText="Add" type="primary" buttonType="submit"}}
   {{/bs-form}}
 </div>
+
+{{#if newCategory.isError}}
+  Error!!
+  {{#each newCategory.errors as |error|}}
+    {{error}}
+  {{/each}}
+{{/if}}
 
 <table class="table table-striped">
   <caption>List of categories</caption>
@@ -18,13 +25,23 @@
   </thead>
   <tbody>
   {{#each model as |category|}}
-    <tr>
-      <td>{{category.id}}</td>
-      <td>{{category.name}}</td>
-      <td>
-        <button class="btn btn-xs btn-danger" {{action 'deleteCategory' category}}>Del</button>
-      </td>
-    </tr>
+    {{#unless category.isNew}}
+      <tr>
+        <td>{{category.id}}</td>
+        <td {{action 'editCategory' category}}>
+          {{#if category.isEditing}}
+            {{input value=category.name}}
+            <button {{action 'updateCategory' category}}>Save</button>
+          {{else}}
+            {{category.name}}
+          {{/if}}
+        </td>
+        <td>
+          <button class="btn btn-xs btn-danger" {{action 'deleteCategory' category}}>Del</button>
+          <button class="btn btn-xs btn-success" {{action 'editCategory' category}}>Edit</button>
+        </td>
+      </tr>
+    {{/unless}}
   {{/each}}
   </tbody>
 </table>

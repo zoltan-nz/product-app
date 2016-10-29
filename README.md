@@ -622,8 +622,195 @@ export default Ember.Route.extend({
 });
 ```
 
-We use `.save()` which is a `Promise`, so we can use `.then` to manage the callback, when the server responds.
+There is a `.save()` which is a `Promise`, so we can use `.then` to manage the callback, when the server respond arrives.
 
+```js
+.then(
+  category => console.log('Response:', category),
+  error => console.log(error)
+)
+```
+
+Server respond can be positive or negative. It can "fulfill" or "reject" our request. The `.then()` method has two params, both are callback functions. The first will get the positive respond with the record, the second will get an error respond. You can play with it with changing our mock server (mirage) settings. Mirage can simulate negative responds also.
+
+You can read more about mirage's route handler and post shorthands on the following pages:
+http://www.ember-cli-mirage.com/docs/v0.2.x/route-handlers/
+http://www.ember-cli-mirage.com/docs/v0.2.x/shorthands/#post-shorthands
+
+If you add the following line to your mirage config file, it responds with a `500` error, which is a brutal internal server error code. 
+
+```js
+// /app/mirage/config.js
+this.post('categories', 'category', 500);
+```
+
+If you extend your `app/routes/admin/categories.js` Category route handler with the following code, you can write out in your console the error message from mirage.
+
+```js
+    addNewCategory(name) {
+      this.store.createRecord('category', { name }).save().then(
+        category => {
+          console.info('Response:', category);
+          this.controller.set('newCategoryName', '');
+        },
+        error => {
+          console.error('Error from server:', error);
+        });
+    },
+```
+
+We can improve further our model to manage the positive and negative responses automatically.
+
+Better practice, if we create an empty model in the store when the user entering the page. On our category list page, our main model is a list of categories, which arrived from the server, this list is automatically added to the controller's `model` property.
+ 
+ We can use the `setupController` hook in the route handler, to create a new empty category also and we can manually add it to a property, what we name it as `newCategory`.
+
+```js
+// app/controllers/admin/categories.js
+  setupController(controller, model) {
+    this._super(controller, model);
+
+    controller.set('newCategory', this.store.createRecord('category'));
+  },
+```
+
+Now we can update our template:
+
+```hbs
+<!-- /app/templates/admin/categories.hbs -->
+  <div class="well well-sm">
+    {{#bs-form formLayout="inline" action="addNewCategory" model=newCategory}}
+      {{bs-form-element label="New category:" placeholder="Category name" value=newCategory.name}}
+      {{bs-button defaultText="Add" type="primary" buttonType="submit"}}
+    {{/bs-form}}
+  </div>
+```
+And the action in route handler:
+
+```
+    addNewCategory(newCategory) {
+      newCategory.save().then(
+        category => {
+          console.info('Response:', category);
+          this.controller.set('newCategory', this.store.createRecord('category'));
+        },
+        error => {
+          console.error('Error from server:', error);
+        });
+    },
+```
+
+### Error and loading state
+
+Using `isError` to show some error message on the page.
+
+```hbs
+<!-- /app/templates/admin/categories.hbs -->
+{{#if newCategory.isError}}
+  Error!!
+  {{#each newCategory.errors as |error|}}
+    {{error}}
+  {{/each}}
+{{/if}}
+```
+Further options managing errors: `error.hbs` or `error` action. You can have an `error.hbs` in the main route our subroutes, Ember automatically will show that page if the server response with error. Other option is an `error` action in your route, if a request in `model()` hook is failed, this action will be called automatically. More details in the official guide: https://guides.emberjs.com/v2.9.0/routing/loading-and-error-substates/
+
+There is a loading state also, you can show a loading spinner or a message while Ember is downloading data in `model()` hook. Drop a `loading.hbs` in your template folder and/or subfolders. Emulate a slow server with mirage. Uncomment this line in `app/mirage/config.js`: `this.timing = 400;` and rewrite 400 for 2000 (2 seconds).
+
+### Filter out the empty record
+
+Previously we modified our route handler and we added a `createRecord()` in `setupController()` hook. Actually, this created a new empty record, which appears in the list. However, Ember Data automatically add a few state helper to the records. We will use `isNew` to filter out this record from the list.
+
+Update the template:
+
+```hbs
+  {{#each model as |category|}}
+    {{#unless category.isNew}}
+      <tr>
+        <td>{{category.id}}</td>
+        <td>
+          {{category.name}}
+        </td>
+        <td>
+          <button class="btn btn-xs btn-danger" {{action 'deleteCategory' category}}>Del</button>
+        </td>
+      </tr>
+    {{/unless}}
+  {{/each}}
+```
+
+### Edit a record
+
+Extend the category model:
+
+```js
+// app/models/category.js
+import DS from 'ember-data';
+
+export default DS.Model.extend({
+
+  name: DS.attr('string'),
+
+  isEditing: false
+
+});
+```
+
+Edit the name of a category with clicking on the name or a dedicated button.
+
+```hbs
+  {{#each model as |category|}}
+    {{#unless category.isNew}}
+      <tr>
+        <td>{{category.id}}</td>
+        <td {{action 'editCategory' category}}>
+          {{#if category.isEditing}}
+            {{input value=category.name}}
+            <button {{action 'updateCategory' category}}>Save</button>
+          {{else}}
+            {{category.name}}
+          {{/if}}
+        </td>
+        <td>
+          <button class="btn btn-xs btn-danger" {{action 'deleteCategory' category}}>Del</button>
+          <button class="btn btn-xs btn-success" {{action 'editCategory' category}}>Edit</button>
+        </td>
+      </tr>
+    {{/unless}}
+  {{/each}}
+```
+
+Add actions to the route handler:
+
+```js
+actions: {
+
+    addNewCategory(newCategory) {
+      newCategory.save().then(
+        category => {
+          console.info('Response:', category);
+          this.controller.set('newCategory', this.store.createRecord('category'));
+        },
+        error => {
+          console.error('Error from server:', error);
+        });
+    },
+
+    editCategory(category) {
+      category.set('isEditing', true);
+    },
+
+    updateCategory(category) {
+      category.save().then(
+        category => category.set('isEditing', false)
+      );
+    },
+
+    deleteCategory(category) {
+      category.destroyRecord();
+    }
+}
+```
 
 [ember_guide]: https://guides.emberjs.com/v2.7.0/getting-started/core-concepts
 [ember_cli_mock_server]: https://ember-cli.com/user-guide/#mocks-and-fixtures
