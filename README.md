@@ -54,7 +54,7 @@ This is the data model structure, what we would like to implement. I leave it he
 Let's create a list about our requirements. Basically this will be our main todo list. ;)
 
 * [x] Admin user can navigate to `/admin`
-* [ ] Admin user can CRUD (create, read, update, delete) `categories` on `/admin/categories`
+* [x] Admin user can CRUD (create, read, update, delete) `categories` on `/admin/categories`
 * [ ] Admin user can CRUD `products` on `/admin/products`
 * [ ] Admin user can change the `category` of a `product`
 * [ ] User can see the list of products on the `home` (`index`)
@@ -812,6 +812,30 @@ actions: {
 }
 ```
 
+The actual state of the categories admin page:
+
+![The categories admin page][step_3_1]
+
+### HOMEWORK
+
+Create the Admin page for Products. You should basically repeat almost the same steps what we followed while we have been building the Categories page. 
+
+1. Generate `admin/products` route.
+
+2. Generate a `product` model with the following fields:
+
+- name (string)
+- sku (string)
+- unitPrice (number)
+
+(Sku = stock keeping unit - usually this is the barcode number in a shop.)
+
+3. Mock product model and server calls with Mirage. (With `ember generate` create Mirage's `product` model, `product` factory. Update the scenario and Mirage's config file. Check Faker.js website, find a related method and generate random product names. Mirage should generate at least 20 products. Tip: use `ember g --help` to see all the generator option.) 
+
+4. List all the products on `admin/products` page. (You have to add code to your `admin/product` route handler and implement html in the connected template.)
+
+5. Add a form to the product list page, where you can create and save a new product, implement the connected actions.
+
 [ember_guide]: https://guides.emberjs.com/v2.7.0/getting-started/core-concepts
 [ember_cli_mock_server]: https://ember-cli.com/user-guide/#mocks-and-fixtures
 [actions_official_guide]: https://guides.emberjs.com/v2.7.0/templates/actions/
@@ -833,3 +857,4 @@ actions: {
 [step_2_1]: doc/step_2_1.png
 [step_2_2]: doc/step_2_2.png
 [step_2_3]: doc/step_2_3.png
+[step_3_1]: doc/step_3_1.png
