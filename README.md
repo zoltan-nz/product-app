@@ -666,7 +666,7 @@ Better practice, if we create an empty model in the store when the user entering
  We can use the `setupController` hook in the route handler, to create a new empty category also and we can manually add it to a property, what we name it as `newCategory`.
 
 ```js
-// app/controllers/admin/categories.js
+// app/routes/admin/categories.js
   setupController(controller, model) {
     this._super(controller, model);
 
