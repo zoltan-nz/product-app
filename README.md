@@ -55,7 +55,7 @@ Let's create a list about our requirements. Basically this will be our main todo
 
 * [x] Admin user can navigate to `/admin`
 * [x] Admin user can CRUD (create, read, update, delete) `categories` on `/admin/categories`
-* [ ] Admin user can CRUD `products` on `/admin/products`
+* [x] Admin user can CRUD `products` on `/admin/products`
 * [ ] Admin user can change the `category` of a `product`
 * [ ] User can see the list of products on the `home` (`index`)
 * [ ] User can filter the list of products clicking on a `category`
@@ -820,19 +820,16 @@ The actual state of the categories admin page:
 
 Create the Admin page for Products. You should basically repeat almost the same steps what we followed while we have been building the Categories page. 
 
-1. Generate `admin/products` route.
+1. Generate `admin/products` route and update the navigation bar on admin pages.
 
 2. Generate a `product` model with the following fields:
+  - `name` (string)
+  - `sku` (string) (Sku = stock keeping unit - usually this is the barcode number in a shop.)
+  - `unitPrice` (number)
 
-- name (string)
-- sku (string)
-- unitPrice (number)
+3. Mock product model and server calls with Mirage. (Use `ember generate mirage-model` and `ember generate mirage-factory`. Update the scenario and the config file in `mirage` folder. Check the Faker.js website and find a related method to generate random product names. Mirage should generate at least 20 products.)
 
-(Sku = stock keeping unit - usually this is the barcode number in a shop.)
-
-3. Mock product model and server calls with Mirage. (With `ember generate` create Mirage's `product` model, `product` factory. Update the scenario and Mirage's config file. Check Faker.js website, find a related method and generate random product names. Mirage should generate at least 20 products. Tip: use `ember g --help` to see all the generator option.) 
-
-4. List all the products on `admin/products` page. (You have to add code to your `admin/product` route handler and implement html in the connected template.)
+4. List all the products on `admin/products` page. (You have to add code to your `admin/product` route handler and implement handlebar in the connected template.)
 
 5. Add a form to the product list page, where you can create and save a new product, implement the connected actions.
 
