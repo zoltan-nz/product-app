@@ -833,6 +833,12 @@ Create the Admin page for Products. You should basically repeat almost the same 
 
 5. Add a form to the product list page, where you can create and save a new product, implement the connected actions.
 
+6. Add editing feature to the list. Three columns are in this list (name, sku, price). It is a nice solution, if there is an Edit button at the end of the row and clicking on this button, the row became a form. When the row is in editing state buttons should be "Save" and "Cancel". Implement the connected actions also.
+
+![A product in edit mode][step_3_2]
+
+[A possible solution in this commit][homework_1_solution_commit_link]
+
 [ember_guide]: https://guides.emberjs.com/v2.7.0/getting-started/core-concepts
 [ember_cli_mock_server]: https://ember-cli.com/user-guide/#mocks-and-fixtures
 [actions_official_guide]: https://guides.emberjs.com/v2.7.0/templates/actions/
@@ -846,6 +852,8 @@ Create the Admin page for Products. You should basically repeat almost the same 
 [faker_js]: https://github.com/marak/Faker.js/
 [ember_bootstrap]: http://kaliber5.github.io/ember-bootstrap/
 
+[homework_1_solution_commit_link]: https://github.com/zoltan-nz/product-app/commit/b52617e960401f0c1d0c749fc78ae96866b4a0e8
+
 [ember_concept_image]: https://guides.emberjs.com/v2.7.0/images/ember-core-concepts/ember-core-concepts.png
 [ember_store_image]: https://guides.emberjs.com/v2.7.0/images/guides/models/finding-unloaded-record-step1-diagram.png
 
@@ -855,3 +863,4 @@ Create the Admin page for Products. You should basically repeat almost the same 
 [step_2_2]: doc/step_2_2.png
 [step_2_3]: doc/step_2_3.png
 [step_3_1]: doc/step_3_1.png
+[step_3_2]: doc/step_3_2.png
