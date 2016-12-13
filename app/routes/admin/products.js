@@ -3,13 +3,20 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model() {
-    return this.store.findAll('product');
+    return Ember.RSVP.hash({
+      products: this.store.findAll('product'),
+      categories: this.store.findAll('category')
+    });
   },
 
-  setupController(controller, model) {
+  setupController(controller, hash) {
+    const model = hash.products;
+    const categories = hash.categories;
+
     this._super(controller, model);
 
     controller.set('newProduct', this.store.createRecord('product'));
+    controller.set('categories', categories);
   },
 
   actions: {

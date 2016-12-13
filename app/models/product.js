@@ -5,5 +5,7 @@ export default DS.Model.extend({
   sku: DS.attr('string'),
   unitPrice: DS.attr('number'),
 
+  category: DS.belongsTo('category'),
+
   isEditing: false
 });

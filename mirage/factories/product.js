@@ -2,8 +2,12 @@ import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
 
-  name() { return faker.commerce.productName(); },
-  sku() { return faker.random.uuid(); },
-  unitPrice() { return faker.commerce.price(); }
+  name: faker.commerce.productName,
+  sku: faker.random.uuid,
+  unitPrice: faker.commerce.price,
 
+  afterCreate(product /*, server */) {
+    product.categoryId = faker.random.number({min: 1, max: 10});
+    product.save();
+  }
 });

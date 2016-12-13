@@ -53,14 +53,15 @@ This is the data model structure, what we would like to implement. I leave it he
 
 Let's create a list about our requirements. Basically this will be our main todo list. ;)
 
-* [x] Admin user can navigate to `/admin`
-* [x] Admin user can CRUD (create, read, update, delete) `categories` on `/admin/categories`
-* [x] Admin user can CRUD `products` on `/admin/products`
-* [ ] Admin user can change the `category` of a `product`
-* [ ] User can see the list of products on the `home` (`index`)
-* [ ] User can filter the list of products clicking on a `category`
+* [x] [Lesson 1 - Admin user can navigate to `/admin`](#user-content-admin-page)
+* [x] [Lesson 2 - Admin user can CRUD (create, read, update, delete) `categories` on `/admin/categories`](#user-content-categories)
+* [x] [Homework 1 - Admin user can CRUD `products` on `/admin/products`](#user-content-homework-1)
+* [x] [Lesson 3 - Admin user can change the `category` of a `product`](#user-content-relationship)
+* [ ] [Homework 2 - User can see the list of products on the `home` (`index`)](#user-content-homework-2)
+* [ ] [Lesson 4 - User can filter the list of products clicking on a `category`](#user-content-filter)
+* [ ] [Lesson 5 - User can collect products in a shopping cart](#user-content-shopping-cart)
 
-## 1. Home page and Admin page
+##<a name='admin-page'></a> 1. Home page and Admin page
 
 ### Creating `application` template and a link to the home page
 
@@ -111,7 +112,7 @@ $ ember g route admin
 ```
 ![Home page and Admin page][step_1]
 
-## 2. Categories Page and CRUD interface
+## <a name='categories'></a>2. Categories Page and CRUD interface
 
 ### `admin/categories` page
 
@@ -480,7 +481,7 @@ import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
 
-  name() { return faker.commerce.department(); }
+  name: faker.commerce.department
 });
 ```
 
@@ -816,7 +817,7 @@ The actual state of the categories admin page:
 
 ![The categories admin page][step_3_1]
 
-### HOMEWORK
+## <a name='homework-1'></a>Homework 1 - Create the Admin page for Products
 
 Create the Admin page for Products. You should basically repeat almost the same steps what we followed while we have been building the Categories page. 
 
@@ -839,6 +840,58 @@ Create the Admin page for Products. You should basically repeat almost the same 
 
 [A possible solution in this commit][homework_1_solution_commit_link]
 
+## <a name='relationship'></a>Lesson 3 - Manage relationship with Ember Data
+
+Related guide: [Ember.js Guide - Model Relationships][ember_guide_relationships]
+
+**Requirements in this lesson:**
+
+- [ ] Extend Ember.js models with `hasMany` and `belongsTo` references.
+- [ ] Add the relationship to the mock, so Mirage can manage 
+- [ ] Add a new option to Product form
+
+**Steps:**
+
+* Extend models.
+* Add extra column to Product list.
+* Update mirage models with associations
+  - http://www.ember-cli-mirage.com/docs/v0.2.x/models/#associations
+  - http://www.ember-cli-mirage.com/docs/v0.2.x/factories/#factories-and-relationships
+* Update mirage factories with `afterCreate()` 
+* Add extra column to Categories with `{{category.products.length}}` 
+* Check server calls in console, too many, reduce it with adding `includes` option to `findAll` in `model` hook.
+* Add a select box to the Product create form. (Using `emberx-select` addon.)
+
+```bash
+$ ember install emberx-select
+```
+
+https://github.com/thefrontside/emberx-select
+
+```hbs
+{{#bs-form-element label="Category:" property="category" as |value|}}
+      {{#x-select class="form-control" value=value as |xs|}}
+        {{#each categories as |category|}}
+          {{#xs.option value=category}}
+            {{category.name}}
+          {{/xs.option}}
+        {{/each}}
+      {{/x-select}}
+    {{/bs-form-element}}
+```
+
+## <a name='homework-2'></a>Homework 2: List products on the home page.
+
+WIP
+
+## <a name='filter'></a>Lesson 4 - Filter products with categories
+
+WIP
+
+## <a name='shopping-cart'></a>Lesson 5 - Creating a shopping cart service and add/remove products in shopping cart.
+
+WIP
+
 [ember_guide]: https://guides.emberjs.com/v2.7.0/getting-started/core-concepts
 [ember_cli_mock_server]: https://ember-cli.com/user-guide/#mocks-and-fixtures
 [actions_official_guide]: https://guides.emberjs.com/v2.7.0/templates/actions/
@@ -853,6 +906,8 @@ Create the Admin page for Products. You should basically repeat almost the same 
 [ember_bootstrap]: http://kaliber5.github.io/ember-bootstrap/
 
 [homework_1_solution_commit_link]: https://github.com/zoltan-nz/product-app/commit/b52617e960401f0c1d0c749fc78ae96866b4a0e8
+
+[ember_guide_relationships]: https://guides.emberjs.com/v2.9.0/models/relationships/
 
 [ember_concept_image]: https://guides.emberjs.com/v2.7.0/images/ember-core-concepts/ember-core-concepts.png
 [ember_store_image]: https://guides.emberjs.com/v2.7.0/images/guides/models/finding-unloaded-record-step1-diagram.png

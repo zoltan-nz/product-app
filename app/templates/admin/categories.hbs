@@ -20,6 +20,7 @@
   <tr>
     <th>#</th>
     <th>Name</th>
+    <th># of products</th>
     <th>Actions</th>
   </tr>
   </thead>
@@ -36,6 +37,7 @@
             {{category.name}}
           {{/if}}
         </td>
+        <td>{{category.products.length}}</td>
         <td>
           <button class="btn btn-xs btn-danger" {{action 'deleteCategory' category}}>Del</button>
           <button class="btn btn-xs btn-success" {{action 'editCategory' category}}>Edit</button>

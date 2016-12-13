@@ -5,6 +5,16 @@
     {{bs-form-element label="Product name:" placeholder="Product name" value=newProduct.name}}
     {{bs-form-element label="SKU:" placeholder="SKU" value=newProduct.sku}}
     {{bs-form-element label="Unit price:" placeholder="Unit price" value=newProduct.unitPrice}}
+    {{#bs-form-element label="Category:" property="category" as |value|}}
+      {{#x-select class="form-control" value=value as |xs|}}
+        {{#each categories as |category|}}
+          {{#xs.option value=category}}
+            {{category.name}}
+          {{/xs.option}}
+        {{/each}}
+      {{/x-select}}
+    {{/bs-form-element}}
+
     {{bs-button defaultText="Add" type="primary" buttonType="submit"}}
   {{/bs-form}}
 </div>
@@ -24,6 +34,7 @@
       <th>Name</th>
       <th>SKU</th>
       <th>Unit price</th>
+      <th>Category</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -51,6 +62,19 @@
               {{input value=product.unitPrice}}
             {{else}}
               {{product.unitPrice}}
+            {{/if}}
+          </td>
+          <td {{action 'editProduct' product}}>
+            {{#if product.isEditing}}
+              {{#x-select value=product.category as |xs|}}
+                {{#each categories as |category|}}
+                  {{#xs.option value=category}}
+                    {{category.name}}
+                  {{/xs.option}}
+                {{/each}}
+              {{/x-select}}
+            {{else}}
+              {{product.category.name}}
             {{/if}}
           </td>
           <td>
