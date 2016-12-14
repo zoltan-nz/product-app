@@ -882,7 +882,10 @@ https://github.com/thefrontside/emberx-select
 
 ## <a name='homework-2'></a>Homework 2: List products on the home page.
 
-WIP
+-[ ] Generate an `index` route.
+-[ ] Download all product in `model` hook.
+-[ ] List on `index.hbs` so it will appear on the home page.
+-[ ] Add some style, for example `panel` from Bootstrap.
 
 ## <a name='filter'></a>Lesson 4 - Filter products with categories
 
