@@ -882,10 +882,12 @@ https://github.com/thefrontside/emberx-select
 
 ## <a name='homework-2'></a>Homework 2: List products on the home page.
 
--[ ] Generate an `index` route.
--[ ] Download all product in `model` hook.
--[ ] List on `index.hbs` so it will appear on the home page.
--[ ] Add some style, for example `panel` from Bootstrap.
+- [ ] Generate an `index` route.
+- [ ] Download all product in `model` hook.
+- [ ] List on `index.hbs` so it will appear on the home page.
+- [ ] Add some style, for example `panel` from Bootstrap.
+
+[A possible solution in this commit][homework_2_solution_commit_link]
 
 ## <a name='filter'></a>Lesson 4 - Filter products with categories
 
@@ -909,6 +911,8 @@ WIP
 [ember_bootstrap]: http://kaliber5.github.io/ember-bootstrap/
 
 [homework_1_solution_commit_link]: https://github.com/zoltan-nz/product-app/commit/b52617e960401f0c1d0c749fc78ae96866b4a0e8
+
+[homework_2_solution_commit_link]: https://github.com/zoltan-nz/product-app/commit/d3bd96182847716388f471a916132eaaaef73880
 
 [ember_guide_relationships]: https://guides.emberjs.com/v2.9.0/models/relationships/
 
