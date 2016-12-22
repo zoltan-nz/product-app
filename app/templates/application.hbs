@@ -1,6 +1,7 @@
-{{#bs-navbar type="inverse" class="navbar-fixed-top"}}
 
-  <div class="container">
+  {{#bs-navbar type="inverse" class="navbar-fixed-top"}}
+    <div class="container">
+
 
     <div class="navbar-header">
       {{#bs-navbar-toggle}}
@@ -24,11 +25,17 @@
         {{/bs-nav-item}}
 
       {{/bs-navbar-nav}}
+      <button type="button" class="btn btn-default navbar-btn navbar-right" {{action 'openCheckout'}}>Shopping cart
+        <span class="badge">{{shoppingCart.items.length}}</span>
+      </button>
     {{/bs-navbar-content}}
 
-  </div>
-{{/bs-navbar}}
+
+    </div>
+  {{/bs-navbar}}
 
 <div class="container">
   {{outlet}}
 </div>
+
+{{outlet 'modal'}}

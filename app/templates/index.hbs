@@ -14,7 +14,14 @@
         </ul>
       </div>
       <div class="panel-footer">
-        Unit price: <strong>{{product.unitPrice}}</strong>
+        <div class="row vertical-align">
+          <div class="col-xs-6">
+            Unit price: <strong>{{product.unitPrice}}</strong>
+          </div>
+          <div class="col-xs-6">
+            <button class="btn btn-default btn-sm pull-right" {{action 'addToShoppingCart' product}}>Add to Cart</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

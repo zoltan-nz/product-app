@@ -882,6 +882,8 @@ https://github.com/thefrontside/emberx-select
 
 ## <a name='homework-2'></a>Homework 2: List products on the home page.
 
+![List products on the homepage][homework_2]
+
 - [ ] Generate an `index` route.
 - [ ] Download all product in `model` hook.
 - [ ] List on `index.hbs` so it will appear on the home page.
@@ -895,12 +897,59 @@ WIP
 
 ## <a name='shopping-cart'></a>Lesson 5 - Creating a shopping cart service and add/remove products in shopping cart.
 
-WIP
+(draft)
+
+**Reading:**
+
+* [Services][official_guide_services]
+* [Dependency Injection][official_guide_di]
+
+**Implementation steps:**
+
+- [ ] Create shopping cart service with add/remove functions.
+- [ ] Inject in the application (routes, controllers, components), so it will be available everywhere.
+- [ ] Implement an `Add to Cart` button and action in the product boxes on the home page. 
+- [ ] Create a shopping-cart component, which will be available from everywhere, so we can remove items or finalize the order.
+ 
+```bash
+$ ember generate service shopping-cart
+```
+
+* Add button to the product panel
+* Add action to the `index.js` 
+* Inject shopping-cart service
+
+* Add a badge to the navbar, but how we access to the `shoppingCart`
+
+* Dependency Injection, initializer
+
+```bash
+$ ember generate initializer shopping-cart
+```
+
+* Modal Window implementation
+* Named outlet
+* Checkout template and controller
+
+```shell
+$ ember g template checkout
+$ ember g controller checkout
+```
+
+* Render in application route
+* Close modal window action
+
+* List products from service
+* Remove item from the service
+* Passing the index instead of the product
+
 
 [ember_guide]: https://guides.emberjs.com/v2.7.0/getting-started/core-concepts
 [ember_cli_mock_server]: https://ember-cli.com/user-guide/#mocks-and-fixtures
 [actions_official_guide]: https://guides.emberjs.com/v2.7.0/templates/actions/
 [official_guide_models]: https://guides.emberjs.com/v2.7.0/models/
+[official_guide_services]: https://guides.emberjs.com/v2.10.0/applications/services/
+[official_guide_di]: https://guides.emberjs.com/v2.10.0/applications/dependency-injection/
 
 [route_handler_api]: http://emberjs.com/api/classes/Ember.Route.html
 [native_array_doc]: http://emberjs.com/api/classes/Ember.NativeArray.html
@@ -926,3 +975,4 @@ WIP
 [step_2_3]: doc/step_2_3.png
 [step_3_1]: doc/step_3_1.png
 [step_3_2]: doc/step_3_2.png
+[homework_2]: doc/homework_2.png

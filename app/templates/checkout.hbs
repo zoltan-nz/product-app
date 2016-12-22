@@ -1,0 +1,25 @@
+<div class="modal fade in" tabindex="-1" role="dialog" style="display: block; padding-left: 0;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" {{action 'closeCheckout'}}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Shopping Cart</h4>
+      </div>
+      <div class="modal-body">
+        <p>Items {{shoppingCart.items.length}}</p>
+
+        <ul>
+          {{#each shoppingCart.items as |product index|}}
+            <li>{{index}}. {{product.name}} <span class="btn btn-link" {{action 'removeItem' product}}>remove</span></li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" {{action ''}}>Clear</button>
+        <button type="button" class="btn btn-primary">Order</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

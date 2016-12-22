@@ -1,3 +1,8 @@
 body {
   padding-top: 70px
 }
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
