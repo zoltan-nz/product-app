@@ -317,7 +317,9 @@ The core element of Ember Data is Ember Model, where we can declare the properti
 
 Ember CLI can generate for us a skeleton model. The following command will create a `category.js` in our `model` folder and will add a `name` field with `string` type.
 
+```shell
 $ ember generate model category name:string
+```
 
 **Update model hook**
 
