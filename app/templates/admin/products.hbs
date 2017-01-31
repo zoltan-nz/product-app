@@ -1,22 +1,33 @@
 <h1>Admin - Products</h1>
 
 <div class="well well-sm">
-  {{#bs-form formLayout="inline" action="addNewProduct" model=newProduct}}
-    {{bs-form-element label="Product name:" placeholder="Product name" value=newProduct.name}}
-    {{bs-form-element label="SKU:" placeholder="SKU" value=newProduct.sku}}
-    {{bs-form-element label="Unit price:" placeholder="Unit price" value=newProduct.unitPrice}}
-    {{#bs-form-element label="Category:" property="category" as |value|}}
-      {{#x-select class="form-control" value=value as |xs|}}
+
+  <form class="form-inline" {{action 'addNewProduct' newProduct on='submit'}}>
+    <div class="form-group">
+      <label for="product-name">Product name:</label>
+      {{input type="text" class="form-control" id="product-name" placeholder="Product name" value=newProduct.name}}
+    </div>
+    <div class="form-group">
+      <label for="sku">SKU:</label>
+      {{input type="text" class="form-control" id="sku" placeholder="SKU" value=newProduct.sku}}
+    </div>
+    <div class="form-group">
+      <label for="unit-price">Unit price:</label>
+      {{input type="text" class="form-control" id="unit-price" placeholder="Unit price" value=newProduct.unitPrice}}
+    </div>
+    <div class="form-group">
+      <label for="category">Category:</label>
+      {{#x-select id="category" class="form-control" value=newProduct.category as |xs|}}
         {{#each categories as |category|}}
           {{#xs.option value=category}}
             {{category.name}}
           {{/xs.option}}
         {{/each}}
       {{/x-select}}
-    {{/bs-form-element}}
+    </div>
+    <button type="submit" class="btn btn-default">Add</button>
+  </form>
 
-    {{bs-button defaultText="Add" type="primary" buttonType="submit"}}
-  {{/bs-form}}
 </div>
 
 {{#if newProduct.isError}}
@@ -29,65 +40,65 @@
 <table class="table table-striped">
   <caption>List of products</caption>
   <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>SKU</th>
-      <th>Unit price</th>
-      <th>Category</th>
-      <th>Actions</th>
-    </tr>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>SKU</th>
+    <th>Unit price</th>
+    <th>Category</th>
+    <th>Actions</th>
+  </tr>
   </thead>
   <tbody>
-    {{#each model as |product|}}
-      {{#unless product.isNew}}
-        <tr>
-          <td>{{product.id}}</td>
-          <td {{action 'editProduct' product}}>
-            {{#if product.isEditing}}
-              {{input value=product.name}}
-            {{else}}
-              {{product.name}}
-            {{/if}}
-          </td>
-          <td {{action 'editProduct' product}}>
-            {{#if product.isEditing}}
-              {{input value=product.sku}}
-            {{else}}
-              {{product.sku}}
-            {{/if}}
-          </td>
-          <td {{action 'editProduct' product}}>
-            {{#if product.isEditing}}
-              {{input value=product.unitPrice}}
-            {{else}}
-              {{product.unitPrice}}
-            {{/if}}
-          </td>
-          <td {{action 'editProduct' product}}>
-            {{#if product.isEditing}}
-              {{#x-select value=product.category as |xs|}}
-                {{#each categories as |category|}}
-                  {{#xs.option value=category}}
-                    {{category.name}}
-                  {{/xs.option}}
-                {{/each}}
-              {{/x-select}}
-            {{else}}
-              {{product.category.name}}
-            {{/if}}
-          </td>
-          <td>
-            {{#if product.isEditing}}
-              <button class="btn btn-xs btn-success" {{action 'updateProduct' product}}>Save</button>
-              <button class="btn btn-xs btn-info" {{action 'cancelEditing' product}}>Cancel</button>
-            {{else}}
-              <button class="btn btn-xs btn-danger" {{action 'deleteProduct' product}}>Del</button>
-              <button class="btn btn-xs btn-default" {{action 'editProduct' product}}>Edit</button>
-            {{/if}}
-          </td>
-        </tr>
-      {{/unless}}
-    {{/each}}
+  {{#each model as |product|}}
+    {{#unless product.isNew}}
+      <tr>
+        <td>{{product.id}}</td>
+        <td {{action 'editProduct' product}}>
+          {{#if product.isEditing}}
+            {{input value=product.name}}
+          {{else}}
+            {{product.name}}
+          {{/if}}
+        </td>
+        <td {{action 'editProduct' product}}>
+          {{#if product.isEditing}}
+            {{input value=product.sku}}
+          {{else}}
+            {{product.sku}}
+          {{/if}}
+        </td>
+        <td {{action 'editProduct' product}}>
+          {{#if product.isEditing}}
+            {{input value=product.unitPrice}}
+          {{else}}
+            {{product.unitPrice}}
+          {{/if}}
+        </td>
+        <td {{action 'editProduct' product}}>
+          {{#if product.isEditing}}
+            {{#x-select value=product.category as |xs|}}
+              {{#each categories as |category|}}
+                {{#xs.option value=category}}
+                  {{category.name}}
+                {{/xs.option}}
+              {{/each}}
+            {{/x-select}}
+          {{else}}
+            {{product.category.name}}
+          {{/if}}
+        </td>
+        <td>
+          {{#if product.isEditing}}
+            <button class="btn btn-xs btn-success" {{action 'updateProduct' product}}>Save</button>
+            <button class="btn btn-xs btn-info" {{action 'cancelEditing' product}}>Cancel</button>
+          {{else}}
+            <button class="btn btn-xs btn-danger" {{action 'deleteProduct' product}}>Del</button>
+            <button class="btn btn-xs btn-default" {{action 'editProduct' product}}>Edit</button>
+          {{/if}}
+        </td>
+      </tr>
+    {{/unless}}
+  {{/each}}
   </tbody>
 </table>

@@ -1,10 +1,15 @@
 <h1>Admin - Categories</h1>
 
 <div class="well well-sm">
-  {{#bs-form formLayout="inline" action="addNewCategory" model=newCategory}}
-    {{bs-form-element label="New category:" placeholder="Category name" value=newCategory.name}}
-    {{bs-button defaultText="Add" type="primary" buttonType="submit"}}
-  {{/bs-form}}
+
+  <form class="form-inline" {{action 'addNewCategory' newCategory on='submit'}}>
+    <div class="form-group">
+      <label for="new-category">New category:</label>
+      {{input type="text" class="form-control" id="new-category" placeholder="Category name" value=newCategory.name}}
+    </div>
+    <button type="submit" class="btn btn-default">Add</button>
+  </form>
+
 </div>
 
 {{#if newCategory.isError}}

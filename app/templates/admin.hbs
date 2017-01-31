@@ -1,7 +1,7 @@
-{{#bs-nav type="pills" }}
-  {{#bs-nav-item}} {{link-to 'Categories' 'admin.categories'}} {{/bs-nav-item}}
-  {{#bs-nav-item}} {{link-to 'Products' 'admin.products'}} {{/bs-nav-item}}
-{{/bs-nav}}
+<ul class="nav nav-pills">
+  {{#nav-link-to 'admin.categories'}}Categories {{/nav-link-to}}
+  {{#nav-link-to 'admin.products'}}Products{{/nav-link-to}}
+</ul>
 
 <hr>
 
