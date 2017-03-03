@@ -956,12 +956,12 @@ $ ember g controller checkout
 * Passing the index instead of the product
 
 
-[ember_guide]: https://guides.emberjs.com/v2.7.0/getting-started/core-concepts
+[ember_guide]: https://guides.emberjs.com/v2.12.0/getting-started/core-concepts
 [ember_cli_mock_server]: https://ember-cli.com/user-guide/#mocks-and-fixtures
-[actions_official_guide]: https://guides.emberjs.com/v2.7.0/templates/actions/
-[official_guide_models]: https://guides.emberjs.com/v2.7.0/models/
-[official_guide_services]: https://guides.emberjs.com/v2.10.0/applications/services/
-[official_guide_di]: https://guides.emberjs.com/v2.10.0/applications/dependency-injection/
+[actions_official_guide]: https://guides.emberjs.com/v2.12.0/templates/actions/
+[official_guide_models]: https://guides.emberjs.com/v2.12.0/models/
+[official_guide_services]: https://guides.emberjs.com/v2.12.0/applications/services/
+[official_guide_di]: https://guides.emberjs.com/v2.12.0/applications/dependency-injection/
 
 [route_handler_api]: http://emberjs.com/api/classes/Ember.Route.html
 [native_array_doc]: http://emberjs.com/api/classes/Ember.NativeArray.html
@@ -978,8 +978,8 @@ $ ember g controller checkout
 
 [ember_guide_relationships]: https://guides.emberjs.com/v2.9.0/models/relationships/
 
-[ember_concept_image]: https://guides.emberjs.com/v2.7.0/images/ember-core-concepts/ember-core-concepts.png
-[ember_store_image]: https://guides.emberjs.com/v2.7.0/images/guides/models/finding-unloaded-record-step1-diagram.png
+[ember_concept_image]: https://guides.emberjs.com/v2.12.0/images/ember-core-concepts/ember-core-concepts.png
+[ember_store_image]: https://guides.emberjs.com/v2.12.0/images/guides/models/finding-unloaded-record-step1-diagram.png
 
 [nested-template]: doc/nested-template-ember.png
 [step_1]: doc/step_1.png

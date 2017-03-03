@@ -17,11 +17,11 @@ export default Ember.Route.extend({
     addNewCategory(newCategory) {
       newCategory.save().then(
         category => {
-          console.info('Response:', category);
+          console.info('Response:', category); // eslint-disable-line no-console
           this.controller.set('newCategory', this.store.createRecord('category'));
         },
         error => {
-          console.error('Error from server:', error);
+          console.error('Error from server:', error); // eslint-disable-line no-console
         });
     },
 

@@ -24,13 +24,13 @@ export default Ember.Route.extend({
     addNewProduct(newProduct) {
       newProduct.save().then(
         product => {
-          console.info('New product saved: ', product);
+          console.info('New product saved: ', product); // eslint-disable-line no-console
 
           // Reset the `newProduct` property with an empty record.
           this.controller.set('newProduct', this.store.createRecord('product'));
         },
         error => {
-          console.error('Error from server:', error);
+          console.error('Error from server:', error);  // eslint-disable-line no-console
         });
     },
 
