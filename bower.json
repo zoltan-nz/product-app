@@ -1,5 +1,6 @@
 {
   "name": "product-app",
   "dependencies": {
+    "Faker": "^4.1.0"
   }
 }
