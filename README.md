@@ -1,5 +1,7 @@
 # Product App
 
+Updated to the latest Ember v2.12
+
 We are going to build a web application which could be a web-shop or a product management app. We can add products, they can belong to a category. We can manage categories also. First of all let's focus on the administration area, later we build the "store front" where a user can collect products in a shopping cart.
  
 I suppose, you finished already the [Ember.js Tutorial][yoember.com], where you built the Library App, so you know roughly how we build Ember application on "Ember Way". For this reason, I don't explain everything, we can focus only the main steps. (It means, you will see all the steps with less explanation. ;)
@@ -979,7 +981,7 @@ $ ember g controller checkout
 [ember_guide_relationships]: https://guides.emberjs.com/v2.9.0/models/relationships/
 
 [ember_concept_image]: https://guides.emberjs.com/v2.12.0/images/ember-core-concepts/ember-core-concepts.png
-[ember_store_image]: https://guides.emberjs.com/v2.12.0/images/guides/models/finding-unloaded-record-step1-diagram.png
+[ember_store_image]: https://guides.emberjs.com/v2..0/images/guides/models/finding-unloaded-record-step1-diagram.png
 
 [nested-template]: doc/nested-template-ember.png
 [step_1]: doc/step_1.png
