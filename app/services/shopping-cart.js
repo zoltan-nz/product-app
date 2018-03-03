@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import Service from '@ember/service';
 
-export default Ember.Service.extend({
+export default Service.extend({
 
-  items: [],
+  items: null,
 
   add(product) {
     this.get('items').pushObject(product);
+    this.set('items', [])
   },
 
   remove(product) {

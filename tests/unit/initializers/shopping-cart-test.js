@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import Application from '@ember/application';
+import { run } from '@ember/runloop';
 import { initialize } from 'product-app/initializers/shopping-cart';
 import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
 
 module('Unit | Initializer | shopping cart', {
   beforeEach() {
-    Ember.run(() => {
-      this.application = Ember.Application.create();
+    run(() => {
+      this.application = Application.create();
       this.application.deferReadiness();
     });
   },
