@@ -1,6 +1,6 @@
 # Product App
 
-Updated to the latest Ember v2.12
+Updated to the latest Ember v3
 
 We are going to build a web application which could be a web-shop or a product management app. We can add products, they can belong to a category. We can manage categories also. First of all let's focus on the administration area, later we build the "store front" where a user can collect products in a shopping cart.
  
@@ -958,12 +958,12 @@ $ ember g controller checkout
 * Passing the index instead of the product
 
 
-[ember_guide]: https://guides.emberjs.com/v2.12.0/getting-started/core-concepts
+[ember_guide]: https://guides.emberjs.com/v3.1.0/getting-started/core-concepts
 [ember_cli_mock_server]: https://ember-cli.com/user-guide/#mocks-and-fixtures
-[actions_official_guide]: https://guides.emberjs.com/v2.12.0/templates/actions/
-[official_guide_models]: https://guides.emberjs.com/v2.12.0/models/
-[official_guide_services]: https://guides.emberjs.com/v2.12.0/applications/services/
-[official_guide_di]: https://guides.emberjs.com/v2.12.0/applications/dependency-injection/
+[actions_official_guide]: https://guides.emberjs.com/v3.1.0/templates/actions/
+[official_guide_models]: https://guides.emberjs.com/v3.1.0/models/
+[official_guide_services]: https://guides.emberjs.com/v3.1.0/applications/services/
+[official_guide_di]: https://guides.emberjs.com/v3.1.0/applications/dependency-injection/
 
 [route_handler_api]: http://emberjs.com/api/classes/Ember.Route.html
 [native_array_doc]: http://emberjs.com/api/classes/Ember.NativeArray.html
@@ -978,9 +978,9 @@ $ ember g controller checkout
 
 [homework_2_solution_commit_link]: https://github.com/zoltan-nz/product-app/commit/d3bd96182847716388f471a916132eaaaef73880
 
-[ember_guide_relationships]: https://guides.emberjs.com/v2.9.0/models/relationships/
+[ember_guide_relationships]: https://guides.emberjs.com/v3.1.0/models/relationships/
 
-[ember_concept_image]: https://guides.emberjs.com/v2.12.0/images/ember-core-concepts/ember-core-concepts.png
+[ember_concept_image]: https://guides.emberjs.com/v3.1.0/images/ember-core-concepts/ember-core-concepts.png
 [ember_store_image]: https://guides.emberjs.com/v2..0/images/guides/models/finding-unloaded-record-step1-diagram.png
 
 [nested-template]: doc/nested-template-ember.png
