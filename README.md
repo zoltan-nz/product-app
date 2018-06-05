@@ -472,7 +472,7 @@ Check console.
 Extend config
 
 ```js
-this.del('/categories');
+this.del('/categories/:id');
 ```
 
 Using Faker in Factory
@@ -491,7 +491,7 @@ export default Factory.extend({
 
 One more!
 
-`resource` shorthand:
+Replace `get`, `post` and `del` with a single `resource` shorthand:
 
 ```js
 this.resource('categories');
