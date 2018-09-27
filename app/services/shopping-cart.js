@@ -4,20 +4,23 @@ export default Service.extend({
 
   items: null,
 
+  init() {
+    this.items = [];
+  },
+
   add(product) {
-    this.get('items').pushObject(product);
-    this.set('items', [])
+    this.items.pushObject(product);
   },
 
   remove(product) {
-    this.get('items').removeObject(product);
+    this.items.removeObject(product);
   },
 
   empty() {
-    this.get('items').clear();
+    this.items.clear();
   },
 
   reset() {
-    this.set('items', []);
-  }
+    this.items = [];
+  },
 });
