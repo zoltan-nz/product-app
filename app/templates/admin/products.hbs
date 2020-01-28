@@ -5,25 +5,25 @@
   <form class="form-inline" {{action 'addNewProduct' newProduct on='submit'}}>
     <div class="form-group">
       <label for="product-name">Product name:</label>
-      {{input type="text" class="form-control" id="product-name" placeholder="Product name" value=newProduct.name}}
+      <Input @type="text" class="form-control" @id="product-name" placeholder="Product name" @value={{newProduct.name}} />
     </div>
     <div class="form-group">
       <label for="sku">SKU:</label>
-      {{input type="text" class="form-control" id="sku" placeholder="SKU" value=newProduct.sku}}
+      <Input @type="text" class="form-control" @id="sku" placeholder="SKU" @value={{newProduct.sku}} />
     </div>
     <div class="form-group">
       <label for="unit-price">Unit price:</label>
-      {{input type="text" class="form-control" id="unit-price" placeholder="Unit price" value=newProduct.unitPrice}}
+      <Input @type="text" class="form-control" @id="unit-price" placeholder="Unit price" @value={{newProduct.unitPrice}} />
     </div>
     <div class="form-group">
       <label for="category">Category:</label>
-      {{#x-select id="category" class="form-control" value=newProduct.category as |xs|}}
+      <XSelect @id="category" @class="form-control" @value={{newProduct.category}} as |xs|>
         {{#each categories as |category|}}
-          {{#xs.option value=category}}
+          <xs.option @value={{category}}>
             {{category.name}}
-          {{/xs.option}}
+          </xs.option>
         {{/each}}
-      {{/x-select}}
+      </XSelect>
     </div>
     <button type="submit" class="btn btn-default">Add</button>
   </form>
@@ -56,34 +56,34 @@
         <td>{{product.id}}</td>
         <td {{action 'editProduct' product}}>
           {{#if product.isEditing}}
-            {{input value=product.name}}
+            <Input @value={{product.name}} />
           {{else}}
             {{product.name}}
           {{/if}}
         </td>
         <td {{action 'editProduct' product}}>
           {{#if product.isEditing}}
-            {{input value=product.sku}}
+            <Input @value={{product.sku}} />
           {{else}}
             {{product.sku}}
           {{/if}}
         </td>
         <td {{action 'editProduct' product}}>
           {{#if product.isEditing}}
-            {{input value=product.unitPrice}}
+            <Input @value={{product.unitPrice}} />
           {{else}}
             {{product.unitPrice}}
           {{/if}}
         </td>
         <td {{action 'editProduct' product}}>
           {{#if product.isEditing}}
-            {{#x-select value=product.category as |xs|}}
+            <XSelect @value={{product.category}} as |xs|>
               {{#each categories as |category|}}
-                {{#xs.option value=category}}
+                <xs.option @value={{category}}>
                   {{category.name}}
-                {{/xs.option}}
+                </xs.option>
               {{/each}}
-            {{/x-select}}
+            </XSelect>
           {{else}}
             {{product.category.name}}
           {{/if}}

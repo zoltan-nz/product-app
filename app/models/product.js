@@ -1,11 +1,11 @@
-import DS from 'ember-data';
+import Model, { attr, belongsTo } from '@ember-data/model';
 
-export default DS.Model.extend({
-  name: DS.attr('string'),
-  sku: DS.attr('string'),
-  unitPrice: DS.attr('number'),
+export default Model.extend({
+  name: attr('string'),
+  sku: attr('string'),
+  unitPrice: attr('number'),
 
-  category: DS.belongsTo('category'),
+  category: belongsTo('category'),
 
   isEditing: false
 });

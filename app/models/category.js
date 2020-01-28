@@ -1,10 +1,10 @@
-import DS from 'ember-data';
+import Model, { attr, hasMany } from '@ember-data/model';
 
-export default DS.Model.extend({
+export default Model.extend({
 
-  name: DS.attr('string'),
+  name: attr('string'),
 
-  products: DS.hasMany('product'),
+  products: hasMany('product'),
 
   isEditing: false
 
