@@ -5,6 +5,7 @@ export default Service.extend({
   items: null,
 
   init() {
+    this._super(...arguments);
     this.items = [];
   },
 
