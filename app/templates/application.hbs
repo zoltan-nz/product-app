@@ -15,8 +15,8 @@
 
       <ul class="nav navbar-nav">
 
-        {{#nav-link-to 'index'}}Home{{/nav-link-to}}
-        {{#nav-link-to 'admin'}}Admin{{/nav-link-to}}
+        <NavLinkTo @route='index'>Home</NavLinkTo>
+        <NavLinkTo @route='admin'>Admin</NavLinkTo>
 
         <button type="button" class="btn btn-default navbar-btn navbar-right" {{action 'openCheckout'}}>
           Shopping cart

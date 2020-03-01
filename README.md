@@ -529,8 +529,8 @@ application.hbs
 
       <ul class="nav navbar-nav">
 
-        {{#nav-link-to 'index'}}Home{{/nav-link-to}}
-        {{#nav-link-to 'admin'}}Admin{{/nav-link-to}}
+        <NavLinkTo @route='index'>Home</NavLinkTo>
+        <NavLinkTo @route='admin'>Admin</NavLinkTo>
 
       </ul>
 
@@ -555,8 +555,8 @@ admin.hbs
 
 ```
 <ul class="nav nav-pills">
-  {{#nav-link-to 'admin.categories'}}Categories{{/nav-link-to}}
-  {{#nav-link-to 'admin.products'}}Products{{/nav-link-to}}
+  <NavLinkTo @route='admin.categories'>Categories</NavLinkTo>
+  <NavLinkTo @route='admin.products'>Products</NavLinkTo>
 </ul>
 
 <hr>
